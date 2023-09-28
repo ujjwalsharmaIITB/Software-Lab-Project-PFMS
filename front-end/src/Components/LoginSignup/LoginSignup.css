@@ -90,3 +90,8 @@
     background: #EAEAEA;
     color: #676767;
 }
+
+.errorText{
+    margin-top: 20px;
+    color: red;
+}

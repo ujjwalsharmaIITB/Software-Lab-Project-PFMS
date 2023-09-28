@@ -1,20 +1,62 @@
 import React, { useState } from 'react'
 import "./LoginSignup.css"
 
-import usernameImg from "../Assets/username.png"
-import passwordImg from "../Assets/password.png"
 
 
-// Import Images
 
 export const LoginSignup = () => {
     const [action , setAction] = useState("Login")
+    const [username , setUsername] = useState("")
+    const [password , setPassword] = useState("")
+    const [name , setName] = useState("")
+    const [isError , setIsError] = useState(false)
+    const [errorMessage , setErrorMessage] = useState("")
 
     function callSignup(){
         console.log("called signup")
+        setIsError(false)
+
+        if(name === "") {
+            setIsError(true)
+            setErrorMessage("Name cannot be Empty")
+            return;
+        }
+
+        if(username === ""){
+            setIsError(true)
+            setErrorMessage("Username Cannot be Empty")
+            return;
+        }
+        if(password === ""){
+            setIsError(true)
+            setErrorMessage("Password Cannot be Empty")
+            return;
+        }
+
+
+        
+        console.log("name , username , password " , name , username , password)
     }
     function callLogin(){
         console.log("called Login")
+        setIsError(false)
+
+        if(username === ""){
+            setIsError(true)
+            setErrorMessage("Username Cannot be Empty")
+            return;
+        }
+        if(password === ""){
+            setIsError(true)
+            setErrorMessage("Password Cannot be Empty")
+            return;
+        }
+        console.log("username , password" , username , password)
+    }
+
+
+    function setValueFromForm(event , setValueFunction) {
+        setValueFunction(event.target.value)
     }
 
   return (
@@ -24,6 +66,9 @@ export const LoginSignup = () => {
                 {action}
             </div>
             <div className="underline"></div>
+            { isError ? 
+            <div className="errorText">{errorMessage}</div> 
+            : <></>}
         </div>
 
         <div className="inputs">
@@ -31,18 +76,27 @@ export const LoginSignup = () => {
             
             {action==="Sign Up" ? 
             <div className="input">
-                <input type="text" placeholder='Name' />
+                <input type="text" placeholder='Name'
+                onChange={(event)=> {
+                    setValueFromForm(event , setName)
+                }} />
             </div>
             : <></> }
 
             {/* For Username */}
             <div className="input">
-                <input type="text" placeholder='Username' />
+                <input type="text" placeholder='Username' 
+                onChange={(event) => {
+                    setValueFromForm(event, setUsername)
+                }}/>
             </div>
             {/* For Password */}
             <div className="input">
                 
-                <input type="password" placeholder='Password' />
+                <input type="password" placeholder='Password'
+                onChange={(event)=> {
+                    setValueFromForm(event , setPassword)
+                }} />
             </div>
         <div className="submit-container">
             <div className={action==="Login"?"submit gray" : "submit"} onClick={
