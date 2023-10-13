@@ -6,6 +6,12 @@
   background-color: linear-gradient(#884a53, rgb(103, 219, 190));
 }
 
+.logoName {
+  font-size: 30px;
+  font-style: italic;
+  font-family: cursive;
+}
+
 .icons {
   display: flex;
   justify-content: space-between;
@@ -16,15 +22,16 @@
   .userInfo {
     align-items: center;
     justify-content: space-between;
+    font-size: 20px;
   }
   .userIMG {
-    width: 22px;
-    height: 22px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
   }
   .settingsIMG {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
   }
 }
