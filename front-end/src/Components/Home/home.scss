@@ -1,0 +1,30 @@
+.home {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: minmax(200px, auto);
+
+  .box {
+    padding: 50px;
+    border-radius: 10px;
+    border: 1px solid lightblue;
+    // background-color: ;
+  }
+
+  .oneMonth {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+  .threeMonth {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .sixMonth {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+  .oneYear {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+}

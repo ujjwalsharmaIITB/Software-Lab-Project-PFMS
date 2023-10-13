@@ -12,6 +12,7 @@
 import "./NavBar.scss";
 
 import settingsSVG from "../Assets/settings.svg";
+import userImg from "../Assets/username.png";
 
 export const NavBar = () => {
   return (
@@ -21,10 +22,11 @@ export const NavBar = () => {
       </div>
 
       <div className="icons">
+        <img src={userImg} alt="" className="userIMG" />
         <div className="userInfo">
           <span>User Name</span>
         </div>
-        <img src={settingsSVG} alt="" className="userIMG" />
+        <img src={settingsSVG} alt="" className="settingsIMG" />
       </div>
     </div>
   );
