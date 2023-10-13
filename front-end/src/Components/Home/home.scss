@@ -1,8 +1,8 @@
 .home {
   display: grid;
   gap: 20px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: minmax(200px, auto);
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(100px, auto);
 
   .box {
     padding: 50px;
@@ -12,19 +12,19 @@
   }
 
   .oneMonth {
-    grid-column: span 1;
-    grid-row: span 2;
-  }
-  .threeMonth {
     grid-column: span 2;
     grid-row: span 2;
   }
-  .sixMonth {
+  .threeMonth {
     grid-column: span 3;
     grid-row: span 2;
   }
-  .oneYear {
-    grid-column: span 3;
+  .sixMonth {
+    grid-column: span 5;
     grid-row: span 2;
+  }
+  .oneYear {
+    grid-column: span 5;
+    grid-row: span 3;
   }
 }
