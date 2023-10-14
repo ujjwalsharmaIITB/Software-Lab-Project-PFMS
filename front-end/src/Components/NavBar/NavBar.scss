@@ -19,6 +19,7 @@
   width: 24px; /* Adjust icon size */
   height: 24px; /* Adjust icon size */
   border-radius: 50%;
+  transition: background-color 0.3s ease;
 }
 
 .userIMG {
@@ -27,4 +28,11 @@
 
 .settingsIMG {
   background-color: #f0d781; /* Adjust settings icon color */
+}
+.userIMG:hover {
+  background-color: #8585ff; /* Adjust user icon color on hover */
+}
+
+.settingsIMG:hover {
+  background-color: #7aff7c; /* Adjust settings icon color on hover */
 }
