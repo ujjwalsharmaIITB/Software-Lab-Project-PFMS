@@ -18,7 +18,7 @@ export const NavBar = () => {
   return (
     <div className="navbar">
       <div className="logo">
-        <span>P.F.M.S</span>
+        <span> Personal Financial Management System</span>
       </div>
 
       <div className="icons">
