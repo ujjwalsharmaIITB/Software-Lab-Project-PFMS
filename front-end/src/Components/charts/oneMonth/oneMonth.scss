@@ -1,0 +1,20 @@
+
+.chartOneMonth{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+
+    .oneMonthTitle {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .chartForOneMonth {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+}
+
