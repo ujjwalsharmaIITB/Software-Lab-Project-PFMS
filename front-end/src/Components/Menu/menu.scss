@@ -1,20 +1,21 @@
 .menu {
-  height: 100vh;
-  background-color: #f0f0f0; /* Add a background color */
-  padding: 20px; /* Add some padding */
+  height: 125vh;
+  background: linear-gradient(to right, #535ef7, #050c1a);
+  padding: 20px;
+  display: flex;
 }
 
 .item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 0;
+  margin-bottom: 5px;
 }
 
 .title {
-  font-size: 24px; /* Increase font size */
-  font-weight: 700; /* Increase font weight */
-  color: #4CAF50; /* Change title color */
+  font-size: 24px;
+  font-weight: 700;
+  color: #4CAF50;
 }
 
 .listItem {
@@ -23,20 +24,21 @@
   gap: 10px;
   padding: 10px;
   border-radius: 5px;
-  transition: background-color 0.3s ease; /* Add transition effect */
-  text-decoration: none; /* Remove underline for links */
+  color: aliceblue;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
 
-  &:hover {
-    background-color: black; /* Change background color on hover */
-  }
+.listItem:hover {
+  background-color: black;
 }
 
 .listItemTitle {
-  font-size: 18px; /* Adjust font size */
-  font-weight: 500; /* Adjust font weight */
-  color: #333; /* Change item text color */
+  font-size: 18px;
+  font-weight: 500;
+  color: aliceblue;
 }
 
 .listItemTitle:hover {
-  color: #8ded90; /* Change item text color on hover */
+  color: #8ded90;
 }

@@ -1,8 +1,7 @@
 import "./home.scss";
-
 export const Home = () => {
   return (
-    <div className="home">
+    <div className="home" text>
       <div className="box oneMonth">One Month</div>
 
       <div className="box threeMonth">Three Month</div>
