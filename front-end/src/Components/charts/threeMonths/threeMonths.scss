@@ -1,0 +1,18 @@
+.chartThreeMonths{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+
+    .threeMonthsTitle {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .chartForThreeMonths {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+}

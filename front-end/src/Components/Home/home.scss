@@ -8,16 +8,16 @@
     padding: 50px;
     border-radius: 10px;
     border: 1px solid rgb(28, 13, 229);
-   
+    
   }
 
   .oneMonth {
-    grid-column: span 2;
+    grid-column: span 5;
     grid-row: span 2;
    
   }
   .threeMonth {
-    grid-column: span 3;
+    grid-column: span 5;
     grid-row: span 2;
   }
   .sixMonth {
@@ -26,6 +26,6 @@
   }
   .oneYear {
     grid-column: span 5;
-    grid-row: span 3;
+    grid-row: span 2;
   }
 }

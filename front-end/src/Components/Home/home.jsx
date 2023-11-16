@@ -6,7 +6,7 @@ import {ThreeMonths} from "../charts/threeMonths/threeMonths";
 
 import {SixMonths} from "../charts/sixMonths/sixMonths";
 
-import {OneYear} from "../charts/oneYear/oneYear";
+import {OneYear, YearData} from "../charts/oneYear/oneYear";
 
 export const Home = () => {
   return (
@@ -24,7 +24,7 @@ export const Home = () => {
       </div>
 
       <div className="box oneYear">
-        <OneYear/>
+        <YearData/>
       </div>
     </div>
   );

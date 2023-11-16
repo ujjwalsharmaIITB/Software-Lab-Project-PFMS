@@ -1,0 +1,14 @@
+.chartYear{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    .yearTitle {
+        display: flex;
+        justify-content: center;
+    }
+    .chartForYear {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+}
