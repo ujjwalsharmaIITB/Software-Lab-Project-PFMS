@@ -39,6 +39,8 @@ const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
 export const ThreeMonths = () => {
   const [month, setMonth] = useState("3Months");
 
+  const [lineChartData, setLineChartData] = useState([]);
+
   // Generate data for three months
   const month1Data = generateLineChartData(1, 30, 2000);
   const month2Data = generateLineChartData(31, 60, 2200);
@@ -59,6 +61,7 @@ export const ThreeMonths = () => {
     );
     const allData = response.data.expenses;
     console.log("allData", allData);
+    setLineChartData(allData);
   }
 
   useEffect(() => {
@@ -74,7 +77,7 @@ export const ThreeMonths = () => {
           <LineChart
             width={600}
             height={300}
-            data={[...month1Data, ...month2Data, ...month3Data]}
+            data={[...lineChartData]}
             margin={{
               top: 5,
               right: 5,

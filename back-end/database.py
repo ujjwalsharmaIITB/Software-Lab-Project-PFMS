@@ -84,10 +84,16 @@ def get_expenses(username , months):
         return None
     try:
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM expenses WHERE username = %s and date >= DATE_SUB(CURDATE(), INTERVAL %s MONTH)", (username,months))
+        cursor.execute("SELECT * FROM expenses WHERE username = %s and date >= DATE_SUB(CURDATE(), INTERVAL %s MONTH) order by date", (username,months))
         expenses = cursor.fetchall()
         close_connection(connection)
-        return expenses
+        finalExpenses = []
+        for expense in expenses:
+            finalExpenses.append({
+                'date' : expense[2],
+                'amount' : expense[1]
+            })
+        return finalExpenses
     except Error as e:
         print("Error while getting expenses from MySQL", e)
         close_connection(connection)
