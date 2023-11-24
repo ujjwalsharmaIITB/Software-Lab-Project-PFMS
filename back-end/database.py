@@ -60,3 +60,35 @@ def get_user(username , password):
         print("Error while getting user from MySQL", e)
         close_connection(connection)
         return None
+
+
+def add_expense(expense):
+    connection = create_connection()
+    if connection is None:
+        return False , "Error while connecting to MySQL"
+    try:
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO expenses (username, expense, date, category) VALUES (%s, %s, %s, %s)", (expense['username'] , expense['expense'] , expense['date'] , expense['category']))
+        connection.commit()
+        close_connection(connection)
+        return True , None
+    except Error as e:
+        print("Error while adding expense to MySQL", e)
+        close_connection(connection)
+        return False , str(e)
+
+
+def get_expenses(username , months):
+    connection = create_connection()
+    if connection is None:
+        return None
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM expenses WHERE username = %s and date >= DATE_SUB(CURDATE(), INTERVAL %s MONTH)", (username,months))
+        expenses = cursor.fetchall()
+        close_connection(connection)
+        return expenses
+    except Error as e:
+        print("Error while getting expenses from MySQL", e)
+        close_connection(connection)
+        return None

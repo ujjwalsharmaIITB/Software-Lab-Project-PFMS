@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./sixMonths.scss"; // Update the CSS file accordingly
 
 import {
@@ -33,7 +34,14 @@ const generatePieChartData = (lineChartData, monthName) => {
   };
 };
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#0088FE", "#00C49F", "#FFBB28"];
+const COLORS = [
+  "#8884d8",
+  "#82ca9d",
+  "#ffc658",
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+];
 
 export const SixMonths = () => {
   const [month, setMonth] = useState("6Months");
@@ -55,6 +63,20 @@ export const SixMonths = () => {
     generatePieChartData(month5Data, "Month 5"),
     generatePieChartData(month6Data, "Month 6"),
   ];
+
+  async function fetchData() {
+    console.log("fetching data for one year");
+
+    const response = await axios.get(
+      "/api/getExpenses/" + sessionStorage.getItem("username") + "/6"
+    );
+    const allData = response.data.expenses;
+    console.log("allData", allData);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="chartSixMonths">
@@ -85,7 +107,12 @@ export const SixMonths = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="amount" stroke="#8884d8" dot={false} />
+            <Line
+              type="monotone"
+              dataKey="amount"
+              stroke="#8884d8"
+              dot={false}
+            />
           </LineChart>
         </ResponsiveContainer>
 
@@ -103,7 +130,10 @@ export const SixMonths = () => {
               label
             >
               {pieChartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip />

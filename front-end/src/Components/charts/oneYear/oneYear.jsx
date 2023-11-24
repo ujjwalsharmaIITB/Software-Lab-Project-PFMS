@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./oneYear.scss"; // Update the CSS file accordingly
 
+import axios from "axios";
 import {
   LineChart,
   ResponsiveContainer,
@@ -52,6 +53,20 @@ export const YearData = () => {
     generatePieChartData(octToDecData, "Trimester 4"),
   ];
 
+  async function fetchData() {
+    console.log("fetching data for one year");
+
+    const response = await axios.get(
+      "/api/getExpenses/" + sessionStorage.getItem("username") + "/12"
+    );
+    const allData = response.data.expenses;
+    console.log("allData", allData);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="chartYear">
       <div className="yearTitle">{month}</div>
@@ -61,7 +76,12 @@ export const YearData = () => {
           <LineChart
             width={800}
             height={400}
-            data={[...janToMarData, ...aprToJunData, ...julToSepData, ...octToDecData]}
+            data={[
+              ...janToMarData,
+              ...aprToJunData,
+              ...julToSepData,
+              ...octToDecData,
+            ]}
             margin={{
               top: 5,
               right: 5,
@@ -74,7 +94,12 @@ export const YearData = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="amount" stroke="#8884d8" dot={false} />
+            <Line
+              type="monotone"
+              dataKey="amount"
+              stroke="#8884d8"
+              dot={false}
+            />
           </LineChart>
         </ResponsiveContainer>
 
@@ -92,7 +117,10 @@ export const YearData = () => {
               label
             >
               {pieChartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip />
