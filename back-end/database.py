@@ -91,7 +91,8 @@ def get_expenses(username , months):
         for expense in expenses:
             finalExpenses.append({
                 'date' : expense[2],
-                'amount' : expense[1]
+                'amount' : expense[1],
+                'category' : expense[3]
             })
         return finalExpenses
     except Error as e:
