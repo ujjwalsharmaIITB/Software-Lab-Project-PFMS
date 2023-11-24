@@ -26,7 +26,7 @@ import {
 import { Home } from "./Components/Home/home";
 import { NavBar } from "./Components/NavBar/NavBar";
 import { Menu } from "./Components/Menu/menu";
-
+import {AddInformation} from "./Components/AddInformation/AddInformation"
 // This component is used for the main dashboard page in which
 // different components like graphs , user parameters, etc
 // will be mounted
@@ -65,6 +65,10 @@ function App() {
         {
           path: "/home",
           element: <Home />,
+        },
+        {
+          path: "/home/add",
+          element: <AddInformation />,
         },
       ],
     },
