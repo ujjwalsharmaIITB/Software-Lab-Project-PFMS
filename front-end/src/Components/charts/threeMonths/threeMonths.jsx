@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./threeMonths.scss";
 
 import {
@@ -50,6 +51,20 @@ export const ThreeMonths = () => {
     generatePieChartData(month3Data, "Month 3"),
   ];
 
+  async function fetchData() {
+    console.log("fetching data for one year");
+
+    const response = await axios.get(
+      "/api/getExpenses/" + sessionStorage.getItem("username") + "/6"
+    );
+    const allData = response.data.expenses;
+    console.log("allData", allData);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="chartThreeMonths">
       <div className="threeMonthsTitle">{month}</div>
@@ -72,7 +87,12 @@ export const ThreeMonths = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="amount" stroke="#8884d8" dot={false} />
+            <Line
+              type="monotone"
+              dataKey="amount"
+              stroke="#8884d8"
+              dot={false}
+            />
           </LineChart>
         </ResponsiveContainer>
 
@@ -90,7 +110,10 @@ export const ThreeMonths = () => {
               label
             >
               {pieChartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip />
@@ -100,4 +123,3 @@ export const ThreeMonths = () => {
     </div>
   );
 };
-

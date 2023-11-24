@@ -1,17 +1,31 @@
 import "./home.scss";
+import { redirect, useNavigate } from "react-router-dom";
 
-import {OneMonth} from "../charts/oneMonth/oneMonth";
+import { useEffect } from "react";
 
-import {ThreeMonths} from "../charts/threeMonths/threeMonths";
+import { OneMonth } from "../charts/oneMonth/oneMonth";
 
-import {SixMonths} from "../charts/sixMonths/sixMonths";
+import { ThreeMonths } from "../charts/threeMonths/threeMonths";
 
-import {OneYear, YearData} from "../charts/oneYear/oneYear";
+import { SixMonths } from "../charts/sixMonths/sixMonths";
+
+import { OneYear, YearData } from "../charts/oneYear/oneYear";
 
 export const Home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("ss", sessionStorage.getItem("username"));
+
+    if (sessionStorage.getItem("username") === null) {
+      console.log("redirecting to login");
+      redirect("/");
+    }
+  }, []);
+
   return (
     <div className="home">
-      <div className="box oneMonth"> 
+      <div className="box oneMonth">
         <OneMonth />
       </div>
 
@@ -20,11 +34,11 @@ export const Home = () => {
       </div>
 
       <div className="box sixMonth">
-      <SixMonths/>
+        <SixMonths />
       </div>
 
       <div className="box oneYear">
-        <YearData/>
+        <YearData />
       </div>
     </div>
   );

@@ -8,8 +8,10 @@
     This Component is used for Login and Signup Page
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./LoginSignup.css";
+import { useNavigate } from "react-router-dom";
 
 export const LoginSignup = () => {
   const [action, setAction] = useState("Login");
@@ -19,8 +21,10 @@ export const LoginSignup = () => {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const navigate = useNavigate();
+
   // Function will be used when sign-up button will be called
-  function callSignup() {
+  async function callSignup() {
     console.log("called signup");
     setIsError(false);
 
@@ -41,11 +45,28 @@ export const LoginSignup = () => {
       return;
     }
 
+    const user = { name: name, username: username, password: password };
+
+    const retDict = await axios.post("/api/addUser", user);
+    const data = retDict.data;
+
+    if (data.status == "success") {
+      sessionStorage.setItem("username", username);
+      sessionStorage.setItem("name", name);
+      navigate("/home");
+    } else {
+      setIsError(true);
+      setErrorMessage("Username Already Exists");
+      return;
+    }
+
+    console.log("retDict", retDict);
+
     console.log("name , username , password ", name, username, password);
   }
 
   // Function will be used when login button will be called
-  function callLogin() {
+  async function callLogin() {
     console.log("called Login");
     setIsError(false);
 
@@ -59,6 +80,28 @@ export const LoginSignup = () => {
       setErrorMessage("Password Cannot be Empty");
       return;
     }
+
+    const user = { name: name, username: username, password: password };
+
+    const retDict = await axios.post("/api/login", user);
+    if (retDict.status === 200) {
+      const data = retDict.data;
+      if (data.status == "success") {
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("name", name);
+        navigate("/home");
+      } else {
+        setIsError(true);
+        setErrorMessage("Invalid Username or Password");
+        return;
+      }
+    } else {
+      setIsError(true);
+      setErrorMessage("Invalid Username or Password");
+      return;
+    }
+
+    console.log("retDict", retDict);
     console.log("username , password", username, password);
   }
 
