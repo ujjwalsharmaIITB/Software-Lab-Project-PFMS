@@ -23,11 +23,6 @@ export const ThreeMonths = () => {
 
   const [lineChartData, setLineChartData] = useState([]);
 
-  // Generate data for three months
-  const month1Data = generateLineChartData(1, 30, 2000);
-  const month2Data = generateLineChartData(31, 60, 2200);
-  const month3Data = generateLineChartData(61, 90, 1800);
-
   // Generate pie chart data
   // const pieChartData = [
   //   generatePieChartData(month1Data, "Month 1"),
@@ -53,7 +48,7 @@ export const ThreeMonths = () => {
           `/api/getExpenses/${sessionStorage.getItem("username")}/6`
         );
 
-        setData(response.data.expenses);
+        setLineChartData(response.data.expenses);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -63,7 +58,7 @@ export const ThreeMonths = () => {
   }, []);
 
   // Generate pie chart data
-  const pieChartData = generatePieChartData(data);
+  const pieChartData = generatePieChartData(lineChartData);
 
   return (
     <div className="chartThreeMonths">
