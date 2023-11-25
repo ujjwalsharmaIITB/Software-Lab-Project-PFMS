@@ -19,7 +19,32 @@ import {
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
 
 export const ThreeMonths = () => {
-  const [data, setData] = useState([]);
+  const [month, setMonth] = useState("3Months");
+
+  const [lineChartData, setLineChartData] = useState([]);
+
+  // Generate data for three months
+  const month1Data = generateLineChartData(1, 30, 2000);
+  const month2Data = generateLineChartData(31, 60, 2200);
+  const month3Data = generateLineChartData(61, 90, 1800);
+
+  // Generate pie chart data
+  // const pieChartData = [
+  //   generatePieChartData(month1Data, "Month 1"),
+  //   generatePieChartData(month2Data, "Month 2"),
+  //   generatePieChartData(month3Data, "Month 3"),
+  // ];
+
+  async function fetchData() {
+    console.log("fetching data for one year");
+
+    const response = await axios.get(
+      "/api/getExpenses/" + sessionStorage.getItem("username") + "/6"
+    );
+    const allData = response.data.expenses;
+    console.log("allData", allData);
+    setLineChartData(allData);
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -49,7 +74,7 @@ export const ThreeMonths = () => {
           <LineChart
             width={600}
             height={300}
-            data={data}
+            data={[...lineChartData]}
             margin={{
               top: 5,
               right: 5,

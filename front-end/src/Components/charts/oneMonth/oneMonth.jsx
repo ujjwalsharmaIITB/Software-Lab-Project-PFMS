@@ -64,6 +64,7 @@ export const OneMonth = () => {
     );
     const allData = response.data.expenses;
     console.log("allData", allData);
+    setLineChartData(allData);
   }
 
   useEffect(() => {

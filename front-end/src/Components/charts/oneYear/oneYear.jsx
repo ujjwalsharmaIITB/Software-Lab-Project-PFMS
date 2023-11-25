@@ -44,6 +44,7 @@ export const YearData = () => {
   const aprToJunData = generateLineChartData(91, 180, 2200);
   const julToSepData = generateLineChartData(181, 273, 1800);
   const octToDecData = generateLineChartData(274, 365, 2100);
+  const [lineChartData, setLineChartData] = useState([]);
 
   // Generate pie chart data
   const pieChartData = [
@@ -61,6 +62,7 @@ export const YearData = () => {
     );
     const allData = response.data.expenses;
     console.log("allData", allData);
+    setLineChartData(allData);
   }
 
   useEffect(() => {
@@ -76,12 +78,7 @@ export const YearData = () => {
           <LineChart
             width={800}
             height={400}
-            data={[
-              ...janToMarData,
-              ...aprToJunData,
-              ...julToSepData,
-              ...octToDecData,
-            ]}
+            data={[...lineChartData]}
             margin={{
               top: 5,
               right: 5,

@@ -88,7 +88,7 @@ export const LoginSignup = () => {
       const data = retDict.data;
       if (data.status == "success") {
         sessionStorage.setItem("username", username);
-        sessionStorage.setItem("name", name);
+        sessionStorage.setItem("name", data.user[2]);
         navigate("/home");
       } else {
         setIsError(true);
