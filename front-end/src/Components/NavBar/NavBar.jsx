@@ -11,10 +11,21 @@
 
 import "./NavBar.scss";
 
-import settingsSVG from "../Assets/settings.svg";
+import logoutSVG from "../Assets/logout.png";
 import userImg from "../Assets/username.png";
 
+import { useNavigate } from "react-router-dom";
+
 export const NavBar = () => {
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+    console.log("logout");
+    sessionStorage.clear();
+    navigate("/");
+  }
+
   return (
     <div className="navbar">
       <div className="logo">
@@ -24,9 +35,9 @@ export const NavBar = () => {
       <div className="icons">
         <img src={userImg} alt="" className="userIMG" />
         <div className="userInfo">
-          <span>User Name</span>
+          <span>{sessionStorage.getItem("name")}</span>
         </div>
-        <img src={settingsSVG} alt="" className="settingsIMG" />
+        <img src={logoutSVG} alt="" className="settingsIMG" onClick={logout} />
       </div>
     </div>
   );

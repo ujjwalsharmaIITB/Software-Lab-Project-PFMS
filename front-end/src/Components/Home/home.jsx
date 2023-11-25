@@ -1,5 +1,5 @@
 import "./home.scss";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useEffect } from "react";
 
@@ -13,14 +13,17 @@ import { OneYear, YearData } from "../charts/oneYear/oneYear";
 
 export const Home = () => {
   const navigate = useNavigate();
+  
+  const checkLogin = () => {
+    const isLoggedin = sessionStorage.getItem("username") !== null;
+    if (!isLoggedin) {
+      navigate("/");
+    }
+  }
 
   useEffect(() => {
-    console.log("ss", sessionStorage.getItem("username"));
-
-    if (sessionStorage.getItem("username") === null) {
-      console.log("redirecting to login");
-      redirect("/");
-    }
+    console.log("Session User Name", sessionStorage.getItem("username"));
+    checkLogin();
   }, []);
 
   return (
