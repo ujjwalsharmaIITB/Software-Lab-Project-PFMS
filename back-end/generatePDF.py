@@ -1,6 +1,6 @@
 import os
 import sys
-import database as db
+from database import get_expenses
 
 def generateLineChart(data , location):
 
@@ -24,20 +24,20 @@ def generatePDF(username):
         return False, "Error while getting expenses from MySQL"
     if oneYear is None:
         return False, "Error while getting expenses from MySQL"
-    try:
+   
 
-        generateLineChart(oneMonth , './latex/oneMonthLineChart.png')
-        generatePieChart(oneMonth , './latex/oneMonthPieChart.png')
-        generateLineChart(threeMonths , './latex/threeMonthsLineChart.png')
-        generatePieChart(threeMonths , './latex/threeMonthsPieChart.png')
-        generateLineChart(sixMonths , './latex/sixMonthsLineChart.png')
-        generatePieChart(sixMonths , './latex/sixMonthsPieChart.png')
-        generateLineChart(oneYear , './latex/oneYearLineChart.png')
-        generatePieChart(oneYear , './latex/oneYearPieChart.png')
+    generateLineChart(oneMonth , './latex/oneMonthLineChart.png')
+    generatePieChart(oneMonth , './latex/oneMonthPieChart.png')
+    generateLineChart(threeMonths , './latex/threeMonthsLineChart.png')
+    generatePieChart(threeMonths , './latex/threeMonthsPieChart.png')
+    generateLineChart(sixMonths , './latex/sixMonthsLineChart.png')
+    generatePieChart(sixMonths , './latex/sixMonthsPieChart.png')
+    generateLineChart(oneYear , './latex/oneYearLineChart.png')
+    generatePieChart(oneYear , './latex/oneYearPieChart.png')
 
-        os.system('pdflatex ./latex/report.tex')
-        
-        return True , None
+    os.system('pdflatex ./latex/report.tex')
+    
+    return True , None
 
 
-        
+    

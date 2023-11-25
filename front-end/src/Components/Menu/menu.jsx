@@ -12,6 +12,7 @@ import "./menu.scss";
 import { Link } from "react-router-dom";
 
 export const Menu = () => {
+
   return (
     <div className="menu">
       <div className="item">
@@ -29,7 +30,7 @@ export const Menu = () => {
           <span className="listItemTitle">Add Information</span>
         </Link>
 
-        <Link to="/" className="listItem">
+        <Link to={"/api/generatePDF/" + sessionStorage.getItem("username")} className="listItem">
           <span className="listItemTitle">Export To P.D.F</span>
         </Link>
       </div>
