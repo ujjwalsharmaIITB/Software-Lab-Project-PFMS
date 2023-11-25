@@ -58,7 +58,7 @@ def get_expenses(username,months):
     return jsonify({'status':'success','message' : 'success' , 'expenses' : expenses})
 
 
-@app.route('/api/generatePDF/<username>' , methods=['GET']):
+@app.route('/api/generatePDF/<username>' , methods=['GET'])
 def generatePDF(username):
     isPDF = pdf.generatePDF(username)
     if isPDF is False:
