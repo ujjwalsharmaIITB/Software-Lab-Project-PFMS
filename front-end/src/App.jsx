@@ -10,7 +10,6 @@
     holds the logic for routing 
 */
 
-import logo from "./logo.svg";
 import "./App.scss";
 
 // import './customCss.scss'
@@ -20,7 +19,6 @@ import { LoginSignup } from "./Components/LoginSignup/LoginSignup";
 import {
   createBrowserRouter,
   RouterProvider,
-  Link,
   Outlet,
 } from "react-router-dom";
 import { Home } from "./Components/Home/home";

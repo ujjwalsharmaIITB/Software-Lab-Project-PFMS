@@ -27,8 +27,7 @@ export const AddInformation = () => {
   // Common expenditure options
   const commonExpenditures = [
     'food','transport','entertainment','shopping','miscellaneous' , 
-    'salary' , 'gift' , 'bonus' , 'investment' ,
-    ,'education','healthcare','insurance','tax','rent','utilities',
+    'salary' , 'gift' , 'bonus' , 'investment' , 'education','healthcare','insurance','tax','rent','utilities',
   ];
 
   return (
