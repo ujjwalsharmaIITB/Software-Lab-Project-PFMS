@@ -1,8 +1,10 @@
-from flask import Flask , request , jsonify
+from flask import Flask , request , jsonify , send_file
 import json
 from flask_cors import CORS
 
+
 import database as db
+import generatePDF as pdf
 
 app = Flask(__name__)
 
@@ -54,6 +56,21 @@ def get_expenses(username,months):
     if expenses is None:
         return jsonify({ 'status':'error' ,'message' : 'expenses not found' , 'expenses' : None})
     return jsonify({'status':'success','message' : 'success' , 'expenses' : expenses})
+
+
+@app.route('/api/generatePDF/<username>' , methods=['GET']):
+def generatePDF(username):
+    isPDF = pdf.generatePDF(username)
+    if isPDF is False:
+        return jsonify({ 'status':'error' ,'message' : 'PDF not generated'})
+    with open('./latex/report.pdf', 'rb') as static_file:
+        return send_file(static_file, attachment_filename='report.pdf')
+    
+
+
+
+
+
 
 
 if __name__ == '__main__':
