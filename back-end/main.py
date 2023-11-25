@@ -6,9 +6,14 @@ from flask_cors import CORS
 import database as db
 import generatePDF as pdf
 
-app = Flask(__name__)
+app = Flask(__name__ , static_folder='deploy' , static_url_path='/' )
 
 cors = CORS(app)
+
+
+@app.route("/")
+def hello():
+    return send_file('deploy/index.html')
 
 
 @app.route('/api/login' , methods=['POST'])

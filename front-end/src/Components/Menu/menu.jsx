@@ -19,11 +19,6 @@ export const Menu = () => {
 
    async function generatePdf() {
     console.log("Generating PDF");
-    const response = await axios.get(
-      "/api/generatePDF/" + sessionStorage.getItem("username")
-    )
-
-    console.log("Response", response);
     const url = "/api/generatePDF/" + sessionStorage.getItem("username")
     navigate(url)
     

@@ -62,7 +62,7 @@ def generatePDF(username):
     # Generate line and pie charts for each period
     try:
         generateLineChart(one_month, './latex/oneMonthLineChart.png')
-        generatePieChart(one_month, './latex/oneMonthLineChart.png')
+        generatePieChart(one_month, './latex/oneMonthPieChart.png')
 
         generateLineChart(three_months, './latex/threeMonthsLineChart.png')
         generatePieChart(three_months, './latex/threeMonthsPieChart.png')
