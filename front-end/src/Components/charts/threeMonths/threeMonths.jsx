@@ -16,42 +16,19 @@ import {
   Cell,
 } from "recharts";
 
-const generateLineChartData = (startDay, endDay, baseAmount) => {
-  const data = [];
-  for (let i = startDay; i <= endDay; i++) {
-    data.push({
-      date: `${i}`,
-      amount: baseAmount + Math.floor(Math.random() * 500),
-    });
-  }
-  return data;
-};
-
-const generatePieChartData = (lineChartData, monthName) => {
-  return {
-    name: monthName,
-    value: lineChartData.reduce((total, data) => total + data.amount, 0),
-  };
-};
-
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
+const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
 
 export const ThreeMonths = () => {
   const [month, setMonth] = useState("3Months");
 
   const [lineChartData, setLineChartData] = useState([]);
 
-  // Generate data for three months
-  const month1Data = generateLineChartData(1, 30, 2000);
-  const month2Data = generateLineChartData(31, 60, 2200);
-  const month3Data = generateLineChartData(61, 90, 1800);
-
   // Generate pie chart data
-  const pieChartData = [
-    generatePieChartData(month1Data, "Month 1"),
-    generatePieChartData(month2Data, "Month 2"),
-    generatePieChartData(month3Data, "Month 3"),
-  ];
+  // const pieChartData = [
+  //   generatePieChartData(month1Data, "Month 1"),
+  //   generatePieChartData(month2Data, "Month 2"),
+  //   generatePieChartData(month3Data, "Month 3"),
+  // ];
 
   async function fetchData() {
     console.log("fetching data for one year");
@@ -65,12 +42,27 @@ export const ThreeMonths = () => {
   }
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `/api/getExpenses/${sessionStorage.getItem("username")}/6`
+        );
+
+        setLineChartData(response.data.expenses);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    }
+
     fetchData();
   }, []);
 
+  // Generate pie chart data
+  const pieChartData = generatePieChartData(lineChartData);
+
   return (
     <div className="chartThreeMonths">
-      <div className="threeMonthsTitle">{month}</div>
+      <div className="threeMonthsTitle">3 Months</div>
       <div className="chartForThreeMonths">
         {/* Line Chart */}
         <ResponsiveContainer width="100%" height="100%">
@@ -125,4 +117,21 @@ export const ThreeMonths = () => {
       </div>
     </div>
   );
+};
+
+const generatePieChartData = (data) => {
+  const categories = [
+    'food', 'transport', 'entertainment', 'shopping', 'miscellaneous', 'gift', 'investment',
+    'education', 'healthcare', 'insurance', 'tax', 'rent', 'utilities',
+  ];
+
+  const categoryData = categories.map(category => {
+    const totalAmount = data
+      .filter(entry => entry.category.toLowerCase() === category.toLowerCase())
+      .reduce((total, entry) => total + entry.amount, 0);
+
+    return { name: category, value: totalAmount };
+  });
+
+  return categoryData;
 };

@@ -1,0 +1,58 @@
+div.AddInfo {
+  text-align: center;
+  color: #8B4513; /* Richer brown color */
+  margin-top: 50px;
+  font-family: 'Open Sans', sans-serif; /* Elegant sans-serif font */
+}
+
+h1.AddInfo {
+  color: #333;
+  font-family: 'Roboto Slab', serif; /* Traditional serif font for headings */
+  font-size: 2rem; /* Increase heading size for better hierarchy */
+  margin-bottom: 20px;
+}
+
+form.AddInfo {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px; /* Adjust max-width based on content */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #F0F0F0; /* Subtle background for form */
+  border-radius: 10px; /* Rounded corners for a softer look */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle elevation */
+}
+
+label.AddInfo {
+  margin-bottom: 8px;
+  color: #588C7E; /* Vibrant green color */
+  font-size: 1.2rem; /* Increase label font size for better readability */
+  font-style: italic;
+  font-weight: bold;
+}
+
+input.AddInfo {
+  padding: 16px; /* Increase padding for larger inputs */
+  margin-bottom: 16px;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  font-size: 1rem; /* Increase font size */
+  font-family: 'Lato', sans-serif; /* Friendly sans-serif font for inputs */
+}
+
+button.AddInfo {
+  padding: 12px 24px; /* Increase padding for a more prominent button */
+  background-color: #007BFF; /* Primary blue color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem; /* Increase font size for better visibility */
+  font-family: 'Raleway', sans-serif; 
+  transition: background-color 0.3s ease;
+
+  button.AddInfo:hover {
+    background-color: #0056B3; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+}

@@ -25,7 +25,7 @@ export const Menu = () => {
           <span className="listItemTitle">Home</span>
         </Link>
 
-        <Link to="/" className="listItem">
+        <Link to="/home/add" className="listItem">
           <span className="listItemTitle">Add Information</span>
         </Link>
 
