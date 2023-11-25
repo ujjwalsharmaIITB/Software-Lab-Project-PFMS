@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./oneYear.scss"; // Update the CSS file accordingly
 
 import axios from "axios";
+
+
 import {
   LineChart,
   ResponsiveContainer,
@@ -16,49 +18,25 @@ import {
   Cell,
 } from "recharts";
 
-const generateLineChartData = (startDay, endDay, baseAmount) => {
-  const data = [];
-  for (let i = startDay; i <= endDay; i++) {
-    data.push({
-      date: `${i}`,
-      amount: baseAmount + Math.floor(Math.random() * 500),
-    });
-  }
-  return data;
-};
-
-const generatePieChartData = (lineChartData, trimesterName) => {
-  return {
-    name: trimesterName,
-    value: lineChartData.reduce((total, data) => total + data.amount, 0),
-  };
-};
-
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
+const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
 
 export const YearData = () => {
-  const [month, setMonth] = useState("Year");
+  const [month, setMonth] = useState("oneYear");
 
-  // Generate data for a year
-  const janToMarData = generateLineChartData(1, 90, 2000);
-  const aprToJunData = generateLineChartData(91, 180, 2200);
-  const julToSepData = generateLineChartData(181, 273, 1800);
-  const octToDecData = generateLineChartData(274, 365, 2100);
   const [lineChartData, setLineChartData] = useState([]);
 
   // Generate pie chart data
-  const pieChartData = [
-    generatePieChartData(janToMarData, "Trimester 1"),
-    generatePieChartData(aprToJunData, "Trimester 2"),
-    generatePieChartData(julToSepData, "Trimester 3"),
-    generatePieChartData(octToDecData, "Trimester 4"),
-  ];
+  // const pieChartData = [
+  //   generatePieChartData(month1Data, "Month 1"),
+  //   generatePieChartData(month2Data, "Month 2"),
+  //   generatePieChartData(month3Data, "Month 3"),
+  // ];
 
   async function fetchData() {
     console.log("fetching data for one year");
 
     const response = await axios.get(
-      "/api/getExpenses/" + sessionStorage.getItem("username") + "/12"
+      "/api/getExpenses/" + sessionStorage.getItem("username") + "/6"
     );
     const allData = response.data.expenses;
     console.log("allData", allData);
@@ -66,18 +44,33 @@ export const YearData = () => {
   }
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `/api/getExpenses/${sessionStorage.getItem("username")}/6`
+        );
+
+        setLineChartData(response.data.expenses);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    }
+
     fetchData();
   }, []);
 
+  // Generate pie chart data
+  const pieChartData = generatePieChartData(lineChartData);
+
   return (
-    <div className="chartYear">
-      <div className="yearTitle">{month}</div>
-      <div className="chartForYear">
+    <div className="chartOneYear">
+      <div className="oneYearTitle">1 Year</div>
+      <div className="chartForOneYear">
         {/* Line Chart */}
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            width={800}
-            height={400}
+            width={600}
+            height={300}
             data={[...lineChartData]}
             margin={{
               top: 5,
@@ -127,3 +120,21 @@ export const YearData = () => {
     </div>
   );
 };
+
+const generatePieChartData = (data) => {
+  const categories = [
+    'food', 'transport', 'entertainment', 'shopping', 'miscellaneous', 'gift', 'investment',
+    'education', 'healthcare', 'insurance', 'tax', 'rent', 'utilities',
+  ];
+
+  const categoryData = categories.map(category => {
+    const totalAmount = data
+      .filter(entry => entry.category.toLowerCase() === category.toLowerCase())
+      .reduce((total, entry) => total + entry.amount, 0);
+
+    return { name: category, value: totalAmount };
+  });
+
+  return categoryData;
+};
+

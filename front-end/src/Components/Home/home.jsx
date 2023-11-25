@@ -15,10 +15,10 @@ export const Home = () => {
   const navigate = useNavigate();
   
   const checkLogin = () => {
-    const isLoggedin = sessionStorage.getItem("username") !== null;
-    if (!isLoggedin) {
-      navigate("/");
-    }
+    // const isLoggedin = sessionStorage.getItem("username") !== null;
+    // if (!isLoggedin) {
+    //   navigate("/");
+    // }
   }
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./sixMonths.scss"; // Update the CSS file accordingly
+import "./sixMonths.scss";
 
 import {
   LineChart,
@@ -16,55 +16,19 @@ import {
   Cell,
 } from "recharts";
 
-const generateLineChartData = (startDay, endDay, baseAmount) => {
-  const data = [];
-  for (let i = startDay; i <= endDay; i++) {
-    data.push({
-      date: `${i}`,
-      amount: baseAmount + Math.floor(Math.random() * 500),
-    });
-  }
-  return data;
-};
-
-const generatePieChartData = (lineChartData, monthName) => {
-  return {
-    name: monthName,
-    value: lineChartData.reduce((total, data) => total + data.amount, 0),
-  };
-};
-
-const COLORS = [
-  "#8884d8",
-  "#82ca9d",
-  "#ffc658",
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-];
+const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
 
 export const SixMonths = () => {
   const [month, setMonth] = useState("6Months");
 
   const [lineChartData, setLineChartData] = useState([]);
 
-  // Generate data for six months
-  const month1Data = generateLineChartData(1, 30, 2000);
-  const month2Data = generateLineChartData(31, 60, 2200);
-  const month3Data = generateLineChartData(61, 90, 1800);
-  const month4Data = generateLineChartData(91, 120, 2100);
-  const month5Data = generateLineChartData(121, 151, 2400);
-  const month6Data = generateLineChartData(152, 182, 2000);
-
   // Generate pie chart data
-  const pieChartData = [
-    generatePieChartData(month1Data, "Month 1"),
-    generatePieChartData(month2Data, "Month 2"),
-    generatePieChartData(month3Data, "Month 3"),
-    generatePieChartData(month4Data, "Month 4"),
-    generatePieChartData(month5Data, "Month 5"),
-    generatePieChartData(month6Data, "Month 6"),
-  ];
+  // const pieChartData = [
+  //   generatePieChartData(month1Data, "Month 1"),
+  //   generatePieChartData(month2Data, "Month 2"),
+  //   generatePieChartData(month3Data, "Month 3"),
+  // ];
 
   async function fetchData() {
     console.log("fetching data for one year");
@@ -78,12 +42,27 @@ export const SixMonths = () => {
   }
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `/api/getExpenses/${sessionStorage.getItem("username")}/6`
+        );
+
+        setLineChartData(response.data.expenses);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    }
+
     fetchData();
   }, []);
 
+  // Generate pie chart data
+  const pieChartData = generatePieChartData(lineChartData);
+
   return (
     <div className="chartSixMonths">
-      <div className="sixMonthsTitle">{month}</div>
+      <div className="sixMonthsTitle">6 Months</div>
       <div className="chartForSixMonths">
         {/* Line Chart */}
         <ResponsiveContainer width="100%" height="100%">
@@ -138,4 +117,21 @@ export const SixMonths = () => {
       </div>
     </div>
   );
+};
+
+const generatePieChartData = (data) => {
+  const categories = [
+    'food', 'transport', 'entertainment', 'shopping', 'miscellaneous', 'gift', 'investment',
+    'education', 'healthcare', 'insurance', 'tax', 'rent', 'utilities',
+  ];
+
+  const categoryData = categories.map(category => {
+    const totalAmount = data
+      .filter(entry => entry.category.toLowerCase() === category.toLowerCase())
+      .reduce((total, entry) => total + entry.amount, 0);
+
+    return { name: category, value: totalAmount };
+  });
+
+  return categoryData;
 };

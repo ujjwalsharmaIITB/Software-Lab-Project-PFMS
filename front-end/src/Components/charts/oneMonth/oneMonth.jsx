@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "./oneMonth.scss";
+
+import React, { useState, useEffect } from "react";
+import "./oneMonth.scss"; // Update the CSS file accordingly
+
+import axios from "axios";
+
 
 import {
   LineChart,
@@ -14,53 +18,26 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import axios from "axios";
 
-// var lineChartData = [
-//   // {
-//   //   date: "1",
-//   //   amount: 2400,
-//   // },
-//   // {
-//   //   date: "2",
-//   //   amount: 2210,
-//   // },
-//   // {
-//   //   date: "4",
-//   //   amount: 2290,
-//   // },
-//   // {
-//   //   date: "10",
-//   //   amount: 2000,
-//   // },
-//   // {
-//   //   date: "15",
-//   //   amount: 2181,
-//   // },
-//   // {
-//   //   date: "20",
-//   //   amount: 2500,
-//   // },
-//   // {
-//   //   date: "30",
-//   //   amount: 2100,
-//   // },
-// ];
-
-const COLORS = ["#8884d8", "#82ca9d"];
+const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
 
 export const OneMonth = () => {
-  const [month, setMonth] = useState("Month");
+  const [month, setMonth] = useState("oneMonth");
 
   const [lineChartData, setLineChartData] = useState([]);
 
-  const [pieChartData, setPieChartData] = useState([]);
+  // Generate pie chart data
+  // const pieChartData = [
+  //   generatePieChartData(month1Data, "Month 1"),
+  //   generatePieChartData(month2Data, "Month 2"),
+  //   generatePieChartData(month3Data, "Month 3"),
+  // ];
 
   async function fetchData() {
-    console.log("fetching data for one month");
+    console.log("fetching data for one year");
 
     const response = await axios.get(
-      "/api/getExpenses/" + sessionStorage.getItem("username") + "/1"
+      "/api/getExpenses/" + sessionStorage.getItem("username") + "/6"
     );
     const allData = response.data.expenses;
     console.log("allData", allData);
@@ -68,29 +45,34 @@ export const OneMonth = () => {
   }
 
   useEffect(() => {
-    fetchData();
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `/api/getExpenses/${sessionStorage.getItem("username")}/6`
+        );
 
-    setPieChartData([
-      // {
-      //   name: "First 15 Days",
-      //   value: lineChartData.slice(0, lineChartData.length/2).reduce((total, data) => total + data.amount, 0),
-      // },
-      // {
-      //   name: "Next 15 Days",
-      //   value: lineChartData.slice(lineChartData.length/2).reduce((total, data) => total + data.amount, 0),
-      // },
-    ]);
+        setLineChartData(response.data.expenses);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    }
+
+    fetchData();
   }, []);
+
+  // Generate pie chart data
+  const pieChartData = generatePieChartData(lineChartData);
 
   return (
     <div className="chartOneMonth">
-      <div className="oneMonthTitle">{month}</div>
+      <div className="oneMonthTitle">1 Year</div>
       <div className="chartForOneMonth">
+        {/* Line Chart */}
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={600}
             height={300}
-            data={lineChartData}
+            data={[...lineChartData]}
             margin={{
               top: 5,
               right: 5,
@@ -112,6 +94,7 @@ export const OneMonth = () => {
           </LineChart>
         </ResponsiveContainer>
 
+        {/* Pie Chart */}
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={300}>
             <Pie
@@ -138,3 +121,21 @@ export const OneMonth = () => {
     </div>
   );
 };
+
+const generatePieChartData = (data) => {
+  const categories = [
+    'food', 'transport', 'entertainment', 'shopping', 'miscellaneous', 'gift', 'investment',
+    'education', 'healthcare', 'insurance', 'tax', 'rent', 'utilities',
+  ];
+
+  const categoryData = categories.map(category => {
+    const totalAmount = data
+      .filter(entry => entry.category.toLowerCase() === category.toLowerCase())
+      .reduce((total, entry) => total + entry.amount, 0);
+
+    return { name: category, value: totalAmount };
+  });
+
+  return categoryData;
+};
+
