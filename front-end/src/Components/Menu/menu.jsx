@@ -19,9 +19,11 @@ export const Menu = () => {
 
    async function generatePdf() {
     console.log("Generating PDF");
-    const url = "/api/generatePDF/" + sessionStorage.getItem("username")
-    navigate(url)
     
+    const url = "/api/generatePDF/" + sessionStorage.getItem("username")
+
+    window.open(url, "_blank")
+
   }
 
   return (
