@@ -1,6 +1,7 @@
 // AddInformation.jsx
 
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AddInformation.scss';
 
@@ -9,15 +10,33 @@ export const AddInformation = () => {
   const [date, setDate] = useState('');
   const [expenses, setExpenses] = useState('');
   const [expenseType, setExpenseType] = useState(''); // New state for expense type
-  const [isSuccess, setIsSuccess] = useState(false);
   const [fontColor, setFontColor] = useState('red'); // New state for font color
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
+
+
+  const checkLogin = () => {
+    const isLoggedin = sessionStorage.getItem("username") !== null;
+    if (!isLoggedin) {
+      navigate("/");
+    }
+  }
+
+  useEffect(() => {
+    console.log("Session User Name", sessionStorage.getItem("username"));
+    checkLogin();
+  }, []);
+
+
+
+
+
+
+
 
   // Function to handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    setIsSuccess(false);
     setSuccessMessage('');
 
     // Here, you can handle the data as per your requirements, e.g., send it to a server or store it locally.
@@ -35,13 +54,11 @@ export const AddInformation = () => {
     }
 
     const retDict = await axios.post("/api/addExpense", expense);
-    if(retDict.data.status == "success"){
-      setIsSuccess(true);
+    if(retDict.data.status === "success"){
       setFontColor('green');
       setSuccessMessage("Expense added successfully");
       
     } else {
-      setIsSuccess(false);
       setFontColor('red');
       setSuccessMessage("Expense could not be added ! . Try Again.");
     }

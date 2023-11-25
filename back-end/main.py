@@ -61,10 +61,10 @@ def get_expenses(username,months):
 @app.route('/api/generatePDF/<username>' , methods=['GET'])
 def generatePDF(username):
     isPDF = pdf.generatePDF(username)
+    print(isPDF)
     if isPDF is False:
         return jsonify({ 'status':'error' ,'message' : 'PDF not generated'})
-    with open('./latex/report.pdf', 'rb') as static_file:
-        return send_file(static_file, attachment_filename='report.pdf')
+    return send_file(open('./latex/report.pdf', 'rb') , download_name='report.pdf' , mimetype='application/pdf')
     
 
 
