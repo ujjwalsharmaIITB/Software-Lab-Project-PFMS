@@ -64,7 +64,7 @@ def generatePDF(username):
     print(isPDF)
     if isPDF is False:
         return jsonify({ 'status':'error' ,'message' : 'PDF not generated'})
-    return send_file(open('./latex/report.pdf', 'rb') , download_name='report.pdf' , mimetype='application/pdf')
+    return send_file(open('./report.pdf', 'rb') , download_name='report.pdf' , mimetype='application/pdf')
     
 
 

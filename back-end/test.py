@@ -28,7 +28,7 @@ def generateRandomData(n):
     d1 = datetime.strptime('2022/06/01', '%Y/%m/%d')
     d2 = datetime.strptime('2023/11/24', '%Y/%m/%d')
     categories = ['food','transport','entertainment','shopping','miscellaneous' , 
-    'salary' , 'gift' , 'bonus' , 'investment' ,
+     'gift' , 'investment' ,
     'education','healthcare','insurance','tax','rent','utilities'] 
     for _ in range(n):
         index = random.randint(0,len(users)-1)
