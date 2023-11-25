@@ -1,0 +1,39 @@
+.navbar {
+  width: inherit;
+  padding: 15px; /* Adjust padding */
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to right, #535ef7, #050c1a); /* Update gradient colors */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  color: aliceblue;
+}
+
+.icons {
+  display: flex;
+  align-items: center; /* Align icons vertically */
+  gap: 10px; /* Adjust gap between icons */
+  margin-right: 10px; /* Adjust margin */
+}
+
+.userIMG,
+.settingsIMG {
+  width: 24px; /* Adjust icon size */
+  height: 24px; /* Adjust icon size */
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.userIMG {
+  background-color: #f8a5ae; /* Adjust user icon color */
+}
+
+.settingsIMG {
+  background-color: #f0d781; /* Adjust settings icon color */
+}
+.userIMG:hover {
+  background-color: #8585ff; /* Adjust user icon color on hover */
+}
+
+.settingsIMG:hover {
+  background-color: #7aff7c; /* Adjust settings icon color on hover */
+}

@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+// Custom CSS
+
+.main {
+  // background: linear-gradient(pink, rgb(238, 89, 114));
+  // background: linear-gradient(white, #aaaaaa);
+  background: linear-gradient(to left, #fffff7, #e8e4c9);
+  height: 100%;
+}
+
+.containerMain {
+  display: flex;
+}
+
+.menuContainer {
+  width: 250px;
+  padding: 5px 20px;
+  border-right: 2px solid;
+}
+
+.contentContainer {
+  padding: 5px 20px;
+  width: 100%;
+}

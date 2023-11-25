@@ -1,15 +1,22 @@
-.container{
+.login-signup {
+    display: flex;
+    height: 100%;
+    background: linear-gradient(#2A00b7, #42006c);
+}
+
+.container {
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 100px;
+    margin-bottom: 100px;
     background: #fff;
     padding-bottom: 30px;
-    width:600px;
+    width: 600px;
     border-radius: 20px;
 }
 
-.header{
+.header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,13 +25,13 @@
     margin-top: 30px;
 }
 
-.text{
+.text {
     color: #3c009d;
     font-size: 48px;
     font-weight: 700;
 }
 
-.underline{
+.underline {
     width: 61px;
     height: 6px;
     background: #3c009d;
@@ -32,7 +39,7 @@
 }
 
 
-.inputs{
+.inputs {
     margin-top: 55px;
     display: flex;
     flex-direction: column;
@@ -40,32 +47,32 @@
 
 }
 
-.input{
+.input {
     display: flex;
     align-items: center;
     margin: auto;
     width: 480px;
-    height:80px;
+    height: 80px;
     background: #eaeaea;
     border-radius: 6px;
 }
 
-.input img{
+.input img {
     margin: 0px 30px;
 }
 
-.input input{
+.input input {
     height: 50px;
     width: 500px;
     background: transparent;
     border: none;
-    outline:none;
+    outline: none;
     color: #797979;
     font-size: 19px;
     margin-left: 20px;
 }
 
-.submit{
+.submit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,18 +87,18 @@
 }
 
 
-.submit-container{
+.submit-container {
     display: flex;
     gap: 30px;
     margin: 60px auto;
 }
 
-.gray{
+.gray {
     background: #EAEAEA;
     color: #676767;
 }
 
-.errorText{
+.errorText {
     margin-top: 20px;
     color: red;
 }

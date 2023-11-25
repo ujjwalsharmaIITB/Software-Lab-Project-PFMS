@@ -1,0 +1,14 @@
+.chartOneYear{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    .oneYearTitle {
+        display: flex;
+        justify-content: center;
+    }
+    .chartForOneYear {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+}

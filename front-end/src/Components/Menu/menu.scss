@@ -1,0 +1,44 @@
+.menu {
+  height: 125vh;
+  background: linear-gradient(to right, #535ef7, #050c1a);
+  padding: 20px;
+  display: flex;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4CAF50;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  color: aliceblue;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.listItem:hover {
+  background-color: black;
+}
+
+.listItemTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: aliceblue;
+}
+
+.listItemTitle:hover {
+  color: #8ded90;
+}

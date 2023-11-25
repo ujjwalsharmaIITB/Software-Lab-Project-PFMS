@@ -1,0 +1,14 @@
+.chartSixMonths{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    .sixMonthsTitle {
+        display: flex;
+        justify-content: center;
+    }
+    .chartForSixMonths {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+}
