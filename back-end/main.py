@@ -34,8 +34,8 @@ def addUser():
     })
 
 
-@app.route('/api/addData' , methods=['POST'])
-def addData():
+@app.route('/api/addExpense' , methods=['POST'])
+def addExpense():
     data = request.json
     ret_val , message = db.add_expense(data)
     if ret_val is False:
