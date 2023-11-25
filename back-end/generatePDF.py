@@ -1,7 +1,7 @@
 import os
 import sys
 import matplotlib.pyplot as plt
-import database as db
+from database import get_expenses
 
 def generateLineChart(data, location):
     # Extract expenses by date

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./oneYear.scss"; // Update the CSS file accordingly
+import "./oneYear.scss"; 
 
 import axios from "axios";
 
@@ -20,47 +20,28 @@ import {
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
 
-export const YearData = () => {
-  const [month, setMonth] = useState("oneYear");
+export const OneYear = () => {
 
   const [lineChartData, setLineChartData] = useState([]);
+  const [pieChartData, setPieChartData] = useState([]);
 
-  // Generate pie chart data
-  // const pieChartData = [
-  //   generatePieChartData(month1Data, "Month 1"),
-  //   generatePieChartData(month2Data, "Month 2"),
-  //   generatePieChartData(month3Data, "Month 3"),
-  // ];
 
   async function fetchData() {
     console.log("fetching data for one year");
 
     const response = await axios.get(
-      "/api/getExpenses/" + sessionStorage.getItem("username") + "/6"
+      "/api/getExpenses/" + sessionStorage.getItem("username") + "/12"
     );
     const allData = response.data.expenses;
-    console.log("allData", allData);
+    console.log("year data", allData);
     setLineChartData(allData);
+    setPieChartData(generatePieChartData(allData));
   }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(
-          `/api/getExpenses/${sessionStorage.getItem("username")}/6`
-        );
-
-        setLineChartData(response.data.expenses);
-      } catch (error) {
-        console.error("Error fetching data:", error.message);
-      }
-    }
-
     fetchData();
   }, []);
 
-  // Generate pie chart data
-  const pieChartData = generatePieChartData(lineChartData);
 
   return (
     <div className="chartOneYear">

@@ -10,8 +10,25 @@
 
 import "./menu.scss";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const Menu = () => {
+
+  const navigate = useNavigate();
+
+   async function generatePdf() {
+    console.log("Generating PDF");
+    const response = await axios.get(
+      "/api/generatePDF/" + sessionStorage.getItem("username")
+    )
+
+    console.log("Response", response);
+    const url = "/api/generatePDF/" + sessionStorage.getItem("username")
+    navigate(url)
+    
+  }
+
   return (
     <div className="menu">
       <div className="item">
@@ -29,7 +46,7 @@ export const Menu = () => {
           <span className="listItemTitle">Add Information</span>
         </Link>
 
-        <Link to="/" className="listItem">
+        <Link className="listItem" onClick={generatePdf}>
           <span className="listItemTitle">Export To P.D.F</span>
         </Link>
       </div>
