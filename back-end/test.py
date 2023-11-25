@@ -24,23 +24,19 @@ from datetime import datetime
 
 
 def generateRandomData(n):
-    userPrefix = 'user'
-    id = [1,2,3]
-    namePrefix = 'name'
-    d1 = datetime.strptime('2020/01/01', '%Y/%m/%d')
+    users = ['abhay@pfms.com' , 'karan@pfms.com' ,'karun@pfms.com' , 'swapnil@pfms.com' , ' vijay@pfms.com' , 'vinay@pfms.com']
+    d1 = datetime.strptime('2022/06/01', '%Y/%m/%d')
     d2 = datetime.strptime('2023/11/24', '%Y/%m/%d')
     categories = ['food','transport','entertainment','shopping','miscellaneous' , 
     'salary' , 'gift' , 'bonus' , 'investment' ,
     'education','healthcare','insurance','tax','rent','utilities'] 
     for _ in range(n):
-        userId = random.choice(id)
-        newUser = userPrefix + str(userId)
-        newName = namePrefix + str(userId)
+        index = random.randint(0,len(users)-1)
         category = random.choice(categories)
         date = random_date(d1, d2)
-        print(f"INSERT INTO expenses (username, expense, date, category) VALUES ('{newUser}', {random.randint(1,10000)},'{date}','{category}');")
+        print(f"INSERT INTO expenses (username, expense, date, category) VALUES ('{users[index]}', {random.randint(1,10000)},'{date}','{category}');")
 
 
-generateRandomData(100)
+generateRandomData(500)
 
 

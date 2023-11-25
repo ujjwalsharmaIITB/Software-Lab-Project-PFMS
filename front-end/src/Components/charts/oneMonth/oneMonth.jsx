@@ -47,7 +47,7 @@ export const OneMonth = () => {
 
   return (
     <div className="chartOneMonth">
-      <div className="oneMonthTitle">1 Year</div>
+      <div className="oneMonthTitle">1 Month</div>
       <div className="chartForOneMonth">
         {/* Line Chart */}
         <ResponsiveContainer width="100%" height="100%">
@@ -78,13 +78,13 @@ export const OneMonth = () => {
 
         {/* Pie Chart */}
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={300}>
+          <PieChart width={400} height={400}>
             <Pie
               data={pieChartData}
               cx="50%"
               cy="50%"
-              outerRadius={60}
-              innerRadius={45}
+              outerRadius={50}
+              innerRadius={40}
               fill="#8884d8"
               dataKey="value"
               label

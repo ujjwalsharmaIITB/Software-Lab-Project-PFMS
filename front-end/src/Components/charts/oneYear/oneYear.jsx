@@ -76,13 +76,13 @@ export const OneYear = () => {
 
         {/* Pie Chart */}
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={300}>
+          <PieChart width={400} height={400}>
             <Pie
               data={pieChartData}
               cx="50%"
               cy="50%"
-              outerRadius={60}
-              innerRadius={45}
+              outerRadius={140}
+              innerRadius={120}
               fill="#8884d8"
               dataKey="value"
               label

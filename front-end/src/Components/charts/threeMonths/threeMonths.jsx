@@ -79,8 +79,8 @@ export const ThreeMonths = () => {
               data={pieChartData}
               cx="50%"
               cy="50%"
-              outerRadius={60}
-              innerRadius={45}
+              outerRadius={100}
+              innerRadius={80}
               fill="#8884d8"
               dataKey="value"
               label
