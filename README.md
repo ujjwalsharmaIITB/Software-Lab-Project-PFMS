@@ -5,11 +5,14 @@ Semester 1 Project for Software Lab at IIT Bombay
 
 
 To run the project:
-    Run the python script start.sh
-        It will start the mysql server , 
-        activate the virtual environments
-        and run main.py ( python back-end/main.py )
-        (in back-end folder) 
+    Run the python script 
+    
+        start.sh
+        
+            It will start the mysql server , 
+            activate the virtual environments
+            and run main.py ( python back-end/main.py )
+            (in back-end folder) 
 
     back-end contains develop folder which is the code build for front-end
     
