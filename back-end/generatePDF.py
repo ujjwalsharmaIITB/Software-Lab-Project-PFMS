@@ -3,6 +3,8 @@ import sys
 import matplotlib.pyplot as plt
 from database import get_expenses
 
+# code to generate line chart given the data and location to save the chart
+# data is of the same format as the output of get_expenses function
 def generateLineChart(data, location):
     # Extract expenses by date
     expenses_by_date = {}
@@ -26,6 +28,8 @@ def generateLineChart(data, location):
     plt.savefig(location)
     plt.close()
 
+# code to generate pie chart given the data and location to save the chart
+# data is of the same format as the output of get_expenses function
 def generatePieChart(data, location):
     # Extract expenses by category
     categories = ['food', 'transport', 'entertainment', 'shopping', 'miscellaneous', 'gift', 'investment',
@@ -48,6 +52,9 @@ def generatePieChart(data, location):
     plt.savefig(location)
     plt.close()
 
+
+# generate PDF report for the user 
+# having line and pie charts for different periods ( 1 month , 3 months , 6 months , 1 year )
 def generatePDF(username):
     # Get expenses for different periods
     one_month = get_expenses(username, 1)
@@ -61,6 +68,7 @@ def generatePDF(username):
 
     # Generate line and pie charts for each period
     try:
+        # code to generate charts
         generateLineChart(one_month, './latex/oneMonthLineChart.png')
         generatePieChart(one_month, './latex/oneMonthPieChart.png')
 

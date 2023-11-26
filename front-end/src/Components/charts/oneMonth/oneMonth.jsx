@@ -1,9 +1,18 @@
+/*
+    Created by Ujjwal Sharma ,
+    23M0837 , 23M0837@iitb.ac.in
+    github@ujjwalsharmaIITB
+*/
+
+/*
+    This Component is the Navigation Bar
+    It displays the Logo , App Name , Username
+*/
 
 import React, { useState, useEffect } from "react";
 import "./oneMonth.scss"; // Update the CSS file accordingly
 
 import axios from "axios";
-
 
 import {
   LineChart,
@@ -19,14 +28,29 @@ import {
   Cell,
 } from "recharts";
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
+const COLORS = [
+  "#8884d8",
+  "#82ca9d",
+  "#ffc658",
+  "#ff7300",
+  "#d90000",
+  "#0088aa",
+  "#99cc33",
+  "#b37feb",
+  "#ffaa00",
+  "#fcd202",
+  "#008080",
+  "#e3319d",
+  "#994499",
+  "#ff99cc",
+  "#ffcc00",
+];
 
 export const OneMonth = () => {
-
   const [lineChartData, setLineChartData] = useState([]);
   const [pieChartData, setPieChartData] = useState([]);
 
-
+  // this code will fetch data from server and update the state variables
   async function fetchData() {
     console.log("fetching data for one month");
 
@@ -39,6 +63,7 @@ export const OneMonth = () => {
     setPieChartData(generatePieChartData(allData));
   }
 
+  // this code will run only once when the component is mounted
   useEffect(() => {
     fetchData();
   }, []);
@@ -106,13 +131,26 @@ export const OneMonth = () => {
 
 const generatePieChartData = (data) => {
   const categories = [
-    'food', 'transport', 'entertainment', 'shopping', 'miscellaneous', 'gift', 'investment',
-    'education', 'healthcare', 'insurance', 'tax', 'rent', 'utilities',
+    "food",
+    "transport",
+    "entertainment",
+    "shopping",
+    "miscellaneous",
+    "gift",
+    "investment",
+    "education",
+    "healthcare",
+    "insurance",
+    "tax",
+    "rent",
+    "utilities",
   ];
 
-  const categoryData = categories.map(category => {
+  const categoryData = categories.map((category) => {
     const totalAmount = data
-      .filter(entry => entry.category.toLowerCase() === category.toLowerCase())
+      .filter(
+        (entry) => entry.category.toLowerCase() === category.toLowerCase()
+      )
       .reduce((total, entry) => total + entry.amount, 0);
 
     return { name: category, value: totalAmount };
@@ -120,4 +158,3 @@ const generatePieChartData = (data) => {
 
   return categoryData;
 };
-

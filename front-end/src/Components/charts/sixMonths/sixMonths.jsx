@@ -1,3 +1,14 @@
+/*
+    Created by Ujjwal Sharma ,
+    23M0837 , 23M0837@iitb.ac.in
+    github@ujjwalsharmaIITB
+*/
+
+/*
+    This Component is the Navigation Bar
+    It displays the Logo , App Name , Username
+*/
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./sixMonths.scss";
@@ -16,15 +27,29 @@ import {
   Cell,
 } from "recharts";
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d90000", "#0088aa", "#99cc33", "#b37feb", "#ffaa00", "#fcd202", "#008080", "#e3319d", "#994499", "#ff99cc", "#ffcc00"];
+const COLORS = [
+  "#8884d8",
+  "#82ca9d",
+  "#ffc658",
+  "#ff7300",
+  "#d90000",
+  "#0088aa",
+  "#99cc33",
+  "#b37feb",
+  "#ffaa00",
+  "#fcd202",
+  "#008080",
+  "#e3319d",
+  "#994499",
+  "#ff99cc",
+  "#ffcc00",
+];
 
 export const SixMonths = () => {
-
   const [lineChartData, setLineChartData] = useState([]);
   const [pieChartData, setPieChartData] = useState([]);
 
-
-
+  // code to fetch data from server and update the state variables
   async function fetchData() {
     console.log("fetching data for six months");
 
@@ -37,10 +62,10 @@ export const SixMonths = () => {
     setPieChartData(generatePieChartData(allData));
   }
 
+  // this code will run only once when the component is mounted
   useEffect(() => {
     fetchData();
   }, []);
-
 
   return (
     <div className="chartSixMonths">
@@ -103,13 +128,26 @@ export const SixMonths = () => {
 
 const generatePieChartData = (data) => {
   const categories = [
-    'food', 'transport', 'entertainment', 'shopping', 'miscellaneous', 'gift', 'investment',
-    'education', 'healthcare', 'insurance', 'tax', 'rent', 'utilities',
+    "food",
+    "transport",
+    "entertainment",
+    "shopping",
+    "miscellaneous",
+    "gift",
+    "investment",
+    "education",
+    "healthcare",
+    "insurance",
+    "tax",
+    "rent",
+    "utilities",
   ];
 
-  const categoryData = categories.map(category => {
+  const categoryData = categories.map((category) => {
     const totalAmount = data
-      .filter(entry => entry.category.toLowerCase() === category.toLowerCase())
+      .filter(
+        (entry) => entry.category.toLowerCase() === category.toLowerCase()
+      )
       .reduce((total, entry) => total + entry.amount, 0);
 
     return { name: category, value: totalAmount };

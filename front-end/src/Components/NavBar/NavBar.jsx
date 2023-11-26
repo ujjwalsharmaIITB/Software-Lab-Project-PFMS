@@ -17,14 +17,15 @@ import userImg from "../Assets/username.png";
 import { useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
-
   const navigate = useNavigate();
 
+  // code to logout user.
+  // it will clear the session storage and redirect to login page
   const logout = () => {
     console.log("logout");
     sessionStorage.clear();
     navigate("/");
-  }
+  };
 
   return (
     <div className="navbar">
