@@ -1,3 +1,15 @@
+/*
+    Created by Ujjwal Sharma ,
+    23M0837 , 23M0837@iitb.ac.in
+    github@ujjwalsharmaIITB
+*/
+
+/*
+    This Component is the Navigation Bar
+    It displays the Logo , App Name , Username
+*/
+
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./sixMonths.scss";
@@ -24,7 +36,7 @@ export const SixMonths = () => {
   const [pieChartData, setPieChartData] = useState([]);
 
 
-
+// code to fetch data from server and update the state variables
   async function fetchData() {
     console.log("fetching data for six months");
 
@@ -37,6 +49,7 @@ export const SixMonths = () => {
     setPieChartData(generatePieChartData(allData));
   }
 
+  // this code will run only once when the component is mounted
   useEffect(() => {
     fetchData();
   }, []);

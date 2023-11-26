@@ -17,6 +17,7 @@ export const Menu = () => {
 
   const navigate = useNavigate();
 
+  // this code will open the pdf in a new tab
    async function generatePdf() {
     console.log("Generating PDF");
     

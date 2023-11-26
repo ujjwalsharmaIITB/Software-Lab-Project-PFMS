@@ -14,7 +14,7 @@ export const AddInformation = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
-
+  // code to check if user is logged in
   const checkLogin = () => {
     const isLoggedin = sessionStorage.getItem("username") !== null;
     if (!isLoggedin) {
@@ -22,14 +22,12 @@ export const AddInformation = () => {
     }
   }
 
+  // this code will run only once when the component is mounted 
+  // to check if user is logged in else it will redirect to login page
   useEffect(() => {
     console.log("Session User Name", sessionStorage.getItem("username"));
     checkLogin();
   }, []);
-
-
-
-
 
 
 
@@ -53,6 +51,7 @@ export const AddInformation = () => {
       category: expenseType,
     }
 
+    // send data to server
     const retDict = await axios.post("/api/addExpense", expense);
     if(retDict.data.status === "success"){
       setFontColor('green');

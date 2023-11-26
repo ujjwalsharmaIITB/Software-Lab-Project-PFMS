@@ -1,3 +1,14 @@
+/*
+    Created by Ujjwal Sharma ,
+    23M0837 , 23M0837@iitb.ac.in
+    github@ujjwalsharmaIITB
+*/
+
+/*
+    This Component is the Navigation Bar
+    It displays the Logo , App Name , Username
+*/
+
 import "./home.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -14,13 +25,14 @@ import { OneYear } from "../charts/oneYear/oneYear";
 export const Home = () => {
   const navigate = useNavigate();
   
+  // this code is to check if user is logged in else it will redirect to login page
   const checkLogin = () => {
     const isLoggedin = sessionStorage.getItem("username") !== null;
     if (!isLoggedin) {
       navigate("/");
     }
   }
-
+// this code will run only once when the component is mounted to check if user is logged in else it will redirect to login page
   useEffect(() => {
     console.log("Session User Name", sessionStorage.getItem("username"));
     checkLogin();
