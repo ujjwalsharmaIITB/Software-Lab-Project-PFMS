@@ -6,16 +6,21 @@ from flask_cors import CORS
 import database as db
 import generatePDF as pdf
 
+# after building the react app , copy the build folder to the back-end folder as deploy
 app = Flask(__name__ , static_folder='deploy' , static_url_path='/' )
 
 cors = CORS(app)
 
-
+# send the react app as the home page
 @app.route("/")
 def hello():
     return send_file('deploy/index.html')
 
+####
+## Here is the code for the API endpoints: 
+####  
 
+# api for login
 @app.route('/api/login' , methods=['POST'])
 def getUser():
     username = request.json['username']
@@ -25,7 +30,7 @@ def getUser():
         return jsonify({ 'status':'error' ,'message' : 'user not found' , 'user' : None})
     return jsonify({'status':'success','message' : 'success' , 'user' : user})
 
-
+# api for signup
 @app.route('/api/addUser' , methods=['POST'])
 def addUser():
     user = request.json
@@ -40,7 +45,7 @@ def addUser():
         'user' : user
     })
 
-
+# api for adding expense
 @app.route('/api/addExpense' , methods=['POST'])
 def addExpense():
     data = request.json
@@ -54,7 +59,7 @@ def addExpense():
         'data' : data
     })
 
-
+# api for getting expenses
 @app.route('/api/getExpenses/<username>/<months>' , methods=['GET'])
 def get_expenses(username,months):
     expenses = db.get_expenses(username , months)
@@ -62,7 +67,7 @@ def get_expenses(username,months):
         return jsonify({ 'status':'error' ,'message' : 'expenses not found' , 'expenses' : None})
     return jsonify({'status':'success','message' : 'success' , 'expenses' : expenses})
 
-
+# api to generate PDF
 @app.route('/api/generatePDF/<username>' , methods=['GET'])
 def generatePDF(username):
     isPDF = pdf.generatePDF(username)

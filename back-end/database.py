@@ -1,13 +1,14 @@
 import mysql.connector
 from mysql.connector import Error
 
-
+# for connecting to databasr
 def create_connection():
     try:
         connection = mysql.connector.connect(host='localhost',
                                             database='pfms',
                                             user='pfms',
                                             password='pfms')
+        # This is to check if database is connected or not
         if connection.is_connected():
             db_Info = connection.get_server_info()
             print("Connected to MySQL Server version ", db_Info)
@@ -29,13 +30,14 @@ def close_connection(connection):
         connection.close()
         print("MySQL connection is closed")
 
-
+# code for adding user to database
 def add_user(user):
     connection = create_connection()
     if connection is None:
         return False , "Error while connecting to MySQL"
     try:
         cursor = connection.cursor()
+        # insert query
         cursor.execute("INSERT INTO users (username, password, name) VALUES (%s, %s, %s)", (user['username'] , user['password'] , user['name']))
         connection.commit()
         close_connection(connection)
@@ -45,13 +47,14 @@ def add_user(user):
         close_connection(connection)
         return False , str(e)
 
-
+# code for getting user from database
 def get_user(username , password):
     connection = create_connection()
     if connection is None:
         return None
     try:
         cursor = connection.cursor()
+        # select query
         cursor.execute("SELECT * FROM users WHERE username = %s and password = %s", (username,password))
         user = cursor.fetchone()
         close_connection(connection)
@@ -61,13 +64,14 @@ def get_user(username , password):
         close_connection(connection)
         return None
 
-
+# code for adding expense to database
 def add_expense(expense):
     connection = create_connection()
     if connection is None:
         return False , "Error while connecting to MySQL"
     try:
         cursor = connection.cursor()
+        # insert query
         cursor.execute("INSERT INTO expenses (username, expense, date, category) VALUES (%s, %s, %s, %s)", (expense['username'] , expense['expense'] , expense['date'] , expense['category']))
         connection.commit()
         close_connection(connection)
@@ -77,17 +81,19 @@ def add_expense(expense):
         close_connection(connection)
         return False , str(e)
 
-
+# code for getting expenses from database
 def get_expenses(username , months):
     connection = create_connection()
     if connection is None:
         return None
     try:
         cursor = connection.cursor()
+        # select query
         cursor.execute("SELECT * FROM expenses WHERE username = %s and date >= DATE_SUB(CURDATE(), INTERVAL %s MONTH) order by date", (username,months))
         expenses = cursor.fetchall()
         close_connection(connection)
         finalExpenses = []
+        # converting expenses to json format as the frontend expects
         for expense in expenses:
             finalExpenses.append({
                 'date' : expense[2],
