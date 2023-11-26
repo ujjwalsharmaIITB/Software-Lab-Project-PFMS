@@ -24,15 +24,15 @@ import { OneYear } from "../charts/oneYear/oneYear";
 
 export const Home = () => {
   const navigate = useNavigate();
-  
+
   // this code is to check if user is logged in else it will redirect to login page
   const checkLogin = () => {
     const isLoggedin = sessionStorage.getItem("username") !== null;
     if (!isLoggedin) {
       navigate("/");
     }
-  }
-// this code will run only once when the component is mounted to check if user is logged in else it will redirect to login page
+  };
+  // this code will run only once when the component is mounted to check if user is logged in else it will redirect to login page
   useEffect(() => {
     console.log("Session User Name", sessionStorage.getItem("username"));
     checkLogin();

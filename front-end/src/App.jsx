@@ -65,6 +65,7 @@ function App() {
           element: <Home />,
         },
         {
+          // here child is the AddInformation component
           path: "/home/add",
           element: <AddInformation />,
         },

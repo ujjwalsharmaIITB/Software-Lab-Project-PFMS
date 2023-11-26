@@ -17,7 +17,6 @@ import userImg from "../Assets/username.png";
 import { useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
-
   const navigate = useNavigate();
 
   // code to logout user.
@@ -26,7 +25,7 @@ export const NavBar = () => {
     console.log("logout");
     sessionStorage.clear();
     navigate("/");
-  }
+  };
 
   return (
     <div className="navbar">
